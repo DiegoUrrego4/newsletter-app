@@ -1,12 +1,12 @@
 package server
 
 import (
-	"github.com/DiegoUrrego4/newsletter-app/internal/adapters/http/handlers"
-	"github.com/go-chi/chi/v5/middleware"
 	"log"
 	"net/http"
 
+	"github.com/DiegoUrrego4/newsletter-app/internal/adapters/http/handlers"
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 type Server struct{}
