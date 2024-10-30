@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev_user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
+
+
+
+#services:
+#  db:
+#    image: postgres:15
+#    environment:
+#      POSTGRES_USER: ${DB_USER}
+#      POSTGRES_PASSWORD: ${DB_PASSWORD}
+#      POSTGRES_DB: ${DB_NAME}
+#    ports:
+#      - "5432:5432"
+#    volumes:
+#      - db_data:/var/lib/postgresql/data
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U dev_user"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
+#
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    platform: linux/arm64
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      db:
+#        condition: service_healthy
+#    volumes:
+#      - .:/app
+##      - files:/app/files
+#    environment:
+#      - DB_HOST=db
+#      - DB_USER=${DB_USER}
+#      - DB_PASSWORD=${DB_PASSWORD}
+#      - DB_NAME=${DB_NAME}
+#
+#volumes:
+#  db_data:
+#  files:
